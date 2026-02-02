@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoxManager - Simplifiez la gestion de vos box et garages</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .gradient-bg { background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- Header -->
+    <nav class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+        <div class="flex items-center gap-2">
+            <div class="bg-blue-600 p-2 rounded-lg text-white">
+                <i data-lucide="package"></i>
+            </div>
+            <span class="text-xl font-bold tracking-tight">BoxManager</span>
+        </div>
+        <div class="hidden md:flex gap-8 font-medium text-slate-600">
+            <a href="#features" class="hover:text-blue-600 transition">Fonctionnalités</a>
+            <a href="#pricing" class="hover:text-blue-600 transition">Tarifs</a>
+        </div>
+        <a href="#signup" class="bg-blue-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-blue-700 transition shadow-md">
+            Essai Gratuit
+        </a>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="px-6 pt-16 pb-24 max-w-7xl mx-auto text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-6 text-slate-900 leading-tight">
+            Arrêtez de courir après vos loyers.<br/>
+            <span class="text-blue-600 underline decoration-blue-200">Automatisez vos box.</span>
+        </h1>
+        <p class="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+            La plateforme tout-en-un pour gérer vos contrats, vos paiements et vos accès sans lever le petit doigt. Gagnez jusqu'à 5h de gestion par semaine.
+        </p>
+        <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+            <a href="#signup" class="w-full md:w-auto bg-blue-600 text-white text-lg px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg flex items-center justify-center gap-2">
+                Commencer mon essai gratuit <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </a>
+            <p class="text-sm text-slate-500 italic">Aucune carte bancaire requise.</p>
+        </div>
+        
+        <!-- Mockup Preview -->
+        <div class="mt-16 relative">
+            <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 p-2 md:p-4 overflow-hidden">
+                <div class="bg-slate-100 rounded-lg p-4 flex flex-col gap-4">
+                    <div class="flex justify-between items-center border-b pb-4">
+                        <div class="h-4 w-32 bg-slate-200 rounded"></div>
+                        <div class="flex gap-2">
+                            <div class="h-8 w-8 bg-blue-100 rounded-full"></div>
+                            <div class="h-8 w-24 bg-blue-600 rounded"></div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="h-24 bg-green-100 border border-green-200 rounded-lg flex flex-col items-center justify-center">
+                            <span class="text-green-700 font-bold">Box A1</span>
+                            <span class="text-xs text-green-600 italic">Libre</span>
+                        </div>
+                        <div class="h-24 bg-red-100 border border-red-200 rounded-lg flex flex-col items-center justify-center">
+                            <span class="text-red-700 font-bold">Box A2</span>
+                            <span class="text-xs text-red-600 italic">Occupé</span>
+                        </div>
+                        <div class="h-24 bg-red-100 border border-red-200 rounded-lg flex flex-col items-center justify-center">
+                            <span class="text-red-700 font-bold">Box A3</span>
+                            <span class="text-xs text-red-600 italic">Occupé</span>
+                        </div>
+                        <div class="h-24 bg-yellow-100 border border-yellow-200 rounded-lg flex flex-col items-center justify-center">
+                            <span class="text-yellow-700 font-bold">Box A4</span>
+                            <span class="text-xs text-yellow-600 italic">Retard paiement</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Floating badge -->
+            <div class="absolute -bottom-6 -right-4 md:right-10 bg-white p-4 rounded-xl shadow-xl border border-slate-100 hidden sm:flex items-center gap-3">
+                <div class="bg-green-100 text-green-600 p-2 rounded-full"><i data-lucide="check-circle"></i></div>
+                <div class="text-left">
+                    <p class="text-xs text-slate-500">Dernier encaissement</p>
+                    <p class="font-bold text-slate-900">+85,00 € (Box B12)</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Problem/Solutions -->
+    <section id="features" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-900">Conçu pour les propriétaires, pas pour les informaticiens.</h2>
+                <p class="text-slate-600">Tout ce dont vous avez besoin pour gérer vos locations professionnalisées.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-12 text-center md:text-left">
+                <div class="space-y-4">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mx-auto md:mx-0">
+                        <i data-lucide="shield-alert"></i>
+                    </div>
+                    <h3 class="text-xl font-bold italic">Zéro Impayé</h3>
+                    <p class="text-slate-600 italic leading-relaxed">Le système envoie automatiquement des relances par SMS et Email dès le premier jour de retard. Plus besoin d'appeler.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mx-auto md:mx-0">
+                        <i data-lucide="pen-tool"></i>
+                    </div>
+                    <h3 class="text-xl font-bold italic">Contrats en 2 min</h3>
+                    <p class="text-slate-600 italic leading-relaxed">Générez vos contrats PDF et faites-les signer électroniquement. Zéro papier, zéro déplacement.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mx-auto md:mx-0">
+                        <i data-lucide="layout"></i>
+                    </div>
+                    <h3 class="text-xl font-bold italic">Plan Interactif</h3>
+                    <p class="text-slate-600 italic leading-relaxed">Visualisez votre entrepôt sur un plan. Identifiez instantanément vos taux d'occupation et la rentabilité par zone.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="py-24 bg-slate-50">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Un tarif simple et rentable</h2>
+                <p class="text-slate-600 italic">Rentabilisez votre abonnement dès la première location.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Starter -->
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-200 flex flex-col">
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Indépendant</h3>
+                        <p class="text-slate-500 mb-6">Pour ceux qui lancent leur parc.</p>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-5xl font-extrabold text-slate-900">19€</span>
+                            <span class="text-slate-500">/ mois</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-10 flex-grow">
+                        <li class="flex items-center gap-3 text-slate-700 italic font-medium">
+                            <i data-lucide="check" class="text-green-500 w-5 h-5"></i> Jusqu'à 20 unités
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700 italic font-medium">
+                            <i data-lucide="check" class="text-green-500 w-5 h-5"></i> Gestion locataires
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700 italic font-medium">
+                            <i data-lucide="check" class="text-green-500 w-5 h-5"></i> Factures PDF illimitées
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-700 italic font-medium">
+                            <i data-lucide="check" class="text-green-500 w-5 h-5"></i> Paiement en ligne CB
+                        </li>
+                    </ul>
+                    <a href="#signup" class="block text-center w-full py-4 border-2 border-blue-600 text-blue-600 font-bold rounded-xl hover:bg-blue-50 transition">Sélectionner</a>
+                </div>
+
+                <!-- Business -->
+                <div class="bg-blue-600 p-8 rounded-3xl shadow-xl border border-blue-700 flex flex-col relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-yellow-400 text-yellow-900 px-4 py-1 font-bold text-sm transform rotate-45 translate-x-10 translate-y-4">POPULAIRE</div>
+                    <div class="mb-8 text-white">
+                        <h3 class="text-xl font-bold mb-2">Professionnel</h3>
+                        <p class="text-blue-100 mb-6">Automatisation 100% sans effort.</p>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-5xl font-extrabold">49€</span>
+                            <span class="text-blue-100">/ mois</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-10 flex-grow text-white">
+                        <li class="flex items-center gap-3 italic font-medium">
+                            <i data-lucide="check" class="text-blue-200 w-5 h-5"></i> Jusqu'à 100 unités
+                        </li>
+                        <li class="flex items-center gap-3 italic font-medium">
+                            <i data-lucide="zap" class="text-yellow-300 w-5 h-5"></i> Relances automatiques SMS/Email
+                        </li>
+                        <li class="flex items-center gap-3 italic font-medium">
+                            <i data-lucide="zap" class="text-yellow-300 w-5 h-5"></i> Signature électronique intégrée
+                        </li>
+                        <li class="flex items-center gap-3 italic font-medium text-blue-100">
+                            <i data-lucide="check" class="text-blue-200 w-5 h-5"></i> Plan interactif dynamique
+                        </li>
+                        <li class="flex items-center gap-3 italic font-medium text-blue-100">
+                            <i data-lucide="check" class="text-blue-200 w-5 h-5"></i> Multi-utilisateurs (Employés)
+                        </li>
+                    </ul>
+                    <a href="#signup" class="block text-center w-full py-4 bg-white text-blue-600 font-extrabold rounded-xl hover:bg-slate-100 transition shadow-lg">Sélectionner</a>
+                </div>
+            </div>
+            <p class="text-center mt-12 text-slate-500 font-medium">Besoin de plus de 100 unités ? <a href="#" class="text-blue-600 underline">Contactez-nous</a>.</p>
+        </div>
+    </section>
+
+    <!-- Signup Form / Quiz -->
+    <section id="signup" class="py-24 bg-white">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="bg-slate-900 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+                <!-- Decoration -->
+                <div class="absolute -top-10 -left-10 w-40 h-40 bg-blue-600 rounded-full blur-3xl opacity-20"></div>
+                
+                <div class="relative z-10">
+                    <h2 class="text-3xl font-bold text-white mb-4 text-center">Configurez votre espace</h2>
+                    <p class="text-slate-400 text-center mb-10">Répondez à 3 questions pour personnaliser votre expérience.</p>
+                    
+                    <form onsubmit="event.preventDefault(); document.getElementById('success-msg').classList.remove('hidden'); this.classList.add('hidden');" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-300 mb-3 uppercase tracking-wider">Nombre de box / garages gérés</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="size" class="peer hidden" checked>
+                                    <div class="p-4 border border-slate-700 rounded-xl text-center text-slate-400 peer-checked:border-blue-500 peer-checked:text-white peer-checked:bg-blue-600/20 transition">
+                                        &lt; 20 unités
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="size" class="peer hidden">
+                                    <div class="p-4 border border-slate-700 rounded-xl text-center text-slate-400 peer-checked:border-blue-500 peer-checked:text-white peer-checked:bg-blue-600/20 transition">
+                                        20 - 100 unités
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="size" class="peer hidden">
+                                    <div class="p-4 border border-slate-700 rounded-xl text-center text-slate-400 peer-checked:border-blue-500 peer-checked:text-white peer-checked:bg-blue-600/20 transition">
+                                        + de 100 unités
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-300 mb-3 uppercase tracking-wider">Votre principal défi</label>
+                            <select class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-4 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                                <option>Gérer les impayés / relances</option>
+                                <option>La paperasse (contrats, factures)</option>
+                                <option>L'organisation visuelle (plan)</option>
+                                <option>Tout automatiser de A à Z</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-300 mb-3 uppercase tracking-wider">Email professionnel</label>
+                            <input type="email" required placeholder="nom@entreprise.com" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl p-4 focus:ring-2 focus:ring-blue-500 outline-none transition">
+                        </div>
+
+                        <button type="submit" class="w-full bg-blue-600 text-white py-5 rounded-xl font-extrabold text-lg hover:bg-blue-700 transition shadow-lg transform hover:-translate-y-1">
+                            CRÉER MON ACCÈS GRATUIT
+                        </button>
+                        
+                        <p class="text-center text-slate-500 text-sm mt-4">
+                            En validant, vous acceptez nos conditions d'utilisation.
+                        </p>
+                    </form>
+
+                    <!-- Success Message -->
+                    <div id="success-msg" class="hidden text-center py-10 space-y-6">
+                        <div class="w-20 h-20 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto shadow-lg shadow-green-500/30">
+                            <i data-lucide="check" class="w-10 h-10"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white italic">C'est presque prêt !</h3>
+                        <p class="text-slate-400">Un lien de confirmation vient d'être envoyé à votre adresse email. Vérifiez votre boîte de réception.</p>
+                        <button onclick="location.reload()" class="text-blue-400 underline italic">Retourner à la page d'accueil</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section (New) -->
+    <section class="py-20 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-slate-900">Questions Fréquentes</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <h4 class="font-bold text-lg mb-2 text-slate-800 flex items-center gap-2">
+                        <i data-lucide="help-circle" class="w-5 h-5 text-blue-500"></i> Mes données sont-elles en sécurité ?
+                    </h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Absolument. Nous utilisons un chiffrement bancaire (SSL 256-bit) et vos données sont sauvegardées quotidiennement sur des serveurs sécurisés en France.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <h4 class="font-bold text-lg mb-2 text-slate-800 flex items-center gap-2">
+                        <i data-lucide="hard-drive" class="w-5 h-5 text-blue-500"></i> Puis-je exporter mes données ?
+                    </h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Oui, vous restez propriétaire de vos données. Vous pouvez exporter la liste de vos locataires et vos factures au format Excel/PDF à tout moment.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <h4 class="font-bold text-lg mb-2 text-slate-800 flex items-center gap-2">
+                        <i data-lucide="smartphone" class="w-5 h-5 text-blue-500"></i> Est-ce que ça marche sur mobile ?
+                    </h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Tout à fait. BoxManager est conçu pour être utilisé sur le terrain directement depuis votre smartphone ou votre tablette, sans installer d'application.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <h4 class="font-bold text-lg mb-2 text-slate-800 flex items-center gap-2">
+                        <i data-lucide="clock" class="w-5 h-5 text-blue-500"></i> Y a-t-il un engagement ?
+                    </h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">Non, nos offres sont sans engagement de durée. Vous pouvez annuler votre abonnement à tout moment en un seul clic depuis votre espace.</p>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <p class="text-slate-500 mb-4">Vous avez d'autres questions ?</p>
+                <a href="mailto:contact@boxmanager.fr" class="inline-flex items-center gap-2 text-blue-600 font-bold hover:underline">
+                    Contacter l'équipe support <i data-lucide="mail" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-50 border-t border-slate-200 py-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <div class="bg-slate-900 p-1 rounded text-white">
+                    <i data-lucide="package" class="w-4 h-4"></i>
+                </div>
+                <span class="text-lg font-bold">BoxManager</span>
+            </div>
+            <p class="text-slate-500 text-sm italic">© 2024 BoxManager. Fait pour les bâtisseurs de parcs.</p>
+            <div class="flex gap-6 text-slate-400">
+                <i data-lucide="twitter" class="w-5 h-5 cursor-pointer hover:text-blue-400 transition"></i>
+                <i data-lucide="linkedin" class="w-5 h-5 cursor-pointer hover:text-blue-600 transition"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialisation des icônes
+        lucide.createIcons();
+    </script>
+</body>
+</html>
