@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPUS | L'IA au service de l'auditeur</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .text-gradient { background: linear-gradient(180deg, #fff 0%, #666 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        input { background: #111 !important; border: 1px solid #333 !important; color: #fff !important; }
+        input:focus { border-color: #fff !important; outline: none; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <section class="min-h-screen flex flex-col items-center justify-center px-6 py-24">
+        <div class="mb-8 font-black tracking-tighter text-4xl italic">OPUS.</div>
+        <h1 class="text-5xl md:text-8xl font-black text-center text-gradient mb-8 tracking-tighter uppercase leading-none">
+            VOTRE AUDIT <br>EN PILOTE AUTO.
+        </h1>
+        <p class="max-w-2xl text-center text-slate-400 text-lg md:text-xl mb-12 font-light leading-relaxed">
+            L'extension Excel nouvelle génération qui automatise vos tests de détails. <br class="hidden md:block">
+            Extraction de données, rapprochement et liens de preuve en 30 secondes.
+        </p>
+        
+        <a href="#join" class="bg-white text-black px-10 py-4 rounded-full font-bold text-sm uppercase tracking-widest hover:scale-105 transition duration-300">
+            Démarrer l'essai gratuit
+        </a>
+        <p class="mt-6 text-[10px] uppercase tracking-[0.3em] text-white/30 font-bold">Installation instantanée via Microsoft AppSource • Souveraineté France</p>
+    </section>
+
+    <section class="py-24 px-6 border-t border-white/10 bg-zinc-950">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-xs uppercase tracking-[0.5em] text-white/40 mb-20 text-center font-bold italic">Le standard d'exécution Opus</h2>
+            <div class="grid md:grid-cols-3 gap-16">
+                <div>
+                    <span class="text-6xl font-black text-white/10">01</span>
+                    <h3 class="text-xl font-bold mt-4 mb-4 uppercase italic tracking-tighter">Capture.</h3>
+                    <p class="text-slate-400 font-light leading-relaxed text-sm">Ouvrez le panneau Opus dans Excel et déposez vos PDF. Notre IA indexe immédiatement les données clés (TTC, TVA, dates, tiers).</p>
+                </div>
+                <div>
+                    <span class="text-6xl font-black text-white/10">02</span>
+                    <h3 class="text-xl font-bold mt-4 mb-4 uppercase italic tracking-tighter">Réconciliation.</h3>
+                    <p class="text-slate-400 font-light leading-relaxed text-sm">L'outil rapproche vos lignes Excel avec les documents extraits. Le remplissage des feuilles de travail devient automatique.</p>
+                </div>
+                <div>
+                    <span class="text-6xl font-black text-white/10">03</span>
+                    <h3 class="text-xl font-bold mt-4 mb-4 uppercase italic tracking-tighter">Ancrage.</h3>
+                    <p class="text-slate-400 font-light leading-relaxed text-sm">Chaque cellule devient un lien de preuve. Un clic, et le PDF s'ouvre à droite, surlignant le montant exact pour validation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 border-t border-white/10">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-4xl font-black mb-16 tracking-tighter italic">QUESTIONS.</h2>
+            
+            <div class="space-y-12">
+                <div>
+                    <h4 class="text-white font-bold mb-3 uppercase text-xs tracking-[0.2em]">Comment se passe l'installation ?</h4>
+                    <p class="text-slate-500 font-light text-sm leading-relaxed">Opus est un Add-in Web standard déployé via Microsoft AppSource. Son architecture permet une activation simplifiée au niveau de votre espace de travail personnel, sans nécessiter de droits "Administrateur" système sur votre machine ou d'intervention de votre département IT.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-3 uppercase text-xs tracking-[0.2em]">Quel est le modèle tarifaire ?</h4>
+                    <p class="text-slate-500 font-light text-sm leading-relaxed">Opus propose un essai gratuit pour vos 10 premières extractions afin de tester la précision de l'IA sur vos propres dossiers. Pour un usage illimité en mission, l'abonnement est de <strong>29€ par mois</strong>, sans engagement.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-3 uppercase text-xs tracking-[0.2em]">Confidentialité et RGPD ?</h4>
+                    <p class="text-slate-500 font-light text-sm leading-relaxed">Made in France. Nous utilisons des instances Azure OpenAI localisées en France. Les documents sont analysés en mémoire vive (RAM) et ne sont jamais stockés après traitement. Vos données ne sont jamais utilisées pour entraîner l'IA.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-3 uppercase text-xs tracking-[0.2em]">Impact sur la performance d'Excel ?</h4>
+                    <p class="text-slate-500 font-light text-sm leading-relaxed">Contrairement aux solutions classiques, Opus ne stocke pas les fichiers PDF à l'intérieur de vos classeurs. Vos fichiers .xlsx conservent leur légèreté d'origine, évitant tout ralentissement ou corruption de fichier.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 border-t border-white/10 text-center italic font-light px-6 bg-zinc-950">
+        <p class="max-w-3xl mx-auto text-2xl text-white/80 leading-relaxed">
+            "Opus s'intègre parfaitement à mes missions. C'est l'outil le plus précis que j'ai utilisé pour le pointage de factures, sans les lourdeurs logicielles habituelles."
+        </p>
+        <p class="mt-8 uppercase text-[10px] tracking-[0.4em] font-bold text-white/40 italic">— Auditeur Senior (Paris)</p>
+    </section>
+
+    <section id="join" class="py-32 px-6 bg-white text-black">
+        <div class="max-w-xl mx-auto text-center">
+            <h2 class="text-5xl font-black mb-6 tracking-tighter uppercase italic text-black">Accès Prioritaire.</h2>
+            <p class="mb-12 font-medium text-black/60 uppercase text-[10px] tracking-widest">Inscrivez-vous pour recevoir votre lien d'installation</p>
+            
+            <form action="https://formspree.io/f/TON_ID_ICI" method="POST" class="text-left space-y-4">
+                <input type="text" name="name" placeholder="NOM COMPLET" required class="w-full p-4 rounded-none border-black">
+                <input type="email" name="email" placeholder="EMAIL PROFESSIONNEL" required class="w-full p-4 rounded-none border-black">
+                <button type="submit" class="w-full bg-black text-white p-5 font-black uppercase tracking-widest hover:invert transition duration-300">
+                    Démarrer mon essai gratuit
+                </button>
+            </form>
+            <p class="mt-8 text-[10px] uppercase font-bold tracking-widest text-black/40 text-center italic">Tarif Early Adopter : 29€ / mois après essai</p>
+        </div>
+    </section>
+
+    <footer class="p-12 text-[10px] uppercase tracking-[0.6em] text-center text-white/20">
+        OPUS &copy; 2026 — L'EXCELLENCE EN AUDIT.
+    </footer>
+
+</body>
+</html>
