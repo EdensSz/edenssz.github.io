@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SankeyPro | The #1 Sankey Diagram Add-in for Excel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        .gradient-bg { background: linear-gradient(135deg, #eff6ff 0%, #f5f3ff 100%); }
+    </style>
+</head>
+<body class="bg-white text-slate-900">
+
+    <header class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center sticky top-0 bg-white/90 backdrop-blur-md z-50">
+        <div class="flex items-center gap-2 font-bold text-xl tracking-tight">
+            <div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white">S</div>
+            <span>SankeyPro</span>
+        </div>
+        <nav class="hidden md:flex gap-8 text-sm font-medium text-slate-600">
+            <a href="#how-it-works" class="hover:text-blue-600 transition">How it works</a>
+            <a href="#about" class="hover:text-blue-600 transition">About</a>
+            <a href="#faq" class="hover:text-blue-600 transition">FAQ</a>
+        </nav>
+        <a href="https://tally.so/r/7RdZOZ" target="_blank" class="bg-blue-600 text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:bg-blue-700 transition">Get Beta Access</a>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-6 pt-20 pb-12 text-center">
+        <div class="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full text-sm font-bold mb-8">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
+            </span>
+            Exclusive Early Bird Offer
+        </div>
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">Visualize Data Flows <br><span class="text-blue-600">Inside Excel.</span></h1>
+        <p class="text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Stop wasting hours on manual shapes. Generate professional Sankey diagrams for your reports in 3 clicks. No subscription required.
+        </p>
+
+        <div class="mb-14">
+            <a href="https://tally.so/r/7RdZOZ" target="_blank" class="inline-block bg-blue-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-700 transition shadow-xl shadow-blue-200 transform hover:-translate-y-1">
+                Lock in $29 Lifetime Access 🔒
+            </a>
+            <p class="text-sm text-slate-500 mt-3">No payment required today. Private Beta.</p>
+        </div>
+        
+        <div class="max-w-4xl mx-auto bg-slate-900 p-2 rounded-2xl shadow-2xl mb-24 overflow-hidden border-8 border-slate-100">
+            <img src="https://vocena.fr/ezgif-3fa33bf23d83cd19.gif" alt="Sankey Diagram Add-in Demo" class="w-full rounded-lg">
+        </div>
+    </section>
+
+    <section id="how-it-works" class="py-24 gradient-bg">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-16 italic">Create your diagram in 30 seconds</h2>
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6">1</div>
+                    <h3 class="font-bold text-xl mb-3">Select Data</h3>
+                    <p class="text-slate-600">Just highlight your columns (Source, Target, Value) in any Excel sheet.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6">2</div>
+                    <h3 class="font-bold text-xl mb-3">Pick Colors</h3>
+                    <p class="text-slate-600">Choose from 10+ professional palettes or use your own brand colors.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-6">3</div>
+                    <h3 class="font-bold text-xl mb-3">Export & Present</h3>
+                    <p class="text-slate-600">Paste your high-res diagram into PowerPoint or keep it live in Excel.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 max-w-3xl mx-auto px-6">
+        <div class="bg-white border border-slate-200 rounded-3xl p-10 md:p-14 text-center shadow-sm">
+            <h2 class="text-2xl font-bold mb-6 italic text-slate-900">Built out of pure frustration.</h2>
+            <p class="text-slate-600 mb-6 leading-relaxed text-lg">
+                As a data analyst, I spent years frustrated because Excel lacked a native, easy-to-use Sankey tool. The existing solutions were either too complex, required coding, or charged ridiculous monthly fees.
+            </p>
+            <p class="text-slate-600 leading-relaxed text-lg">
+                I built <strong>SankeyPro</strong> to be the tool I always wanted: fast, clean, entirely integrated into Excel, and without a recurring subscription. It's built for professionals who value their time and want their data to tell a clear story.
+            </p>
+            <p class="mt-8 font-semibold text-slate-900">— The Founder (based in France)</p>
+        </div>
+    </section>
+
+    <section id="faq" class="py-24 max-w-5xl mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-4">Common Questions</h2>
+        <p class="text-center text-slate-500 mb-16">Everything you need to know before joining the beta.</p>
+        
+        <div class="grid md:grid-cols-2 gap-x-12 gap-y-10">
+            <div>
+                <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><span class="text-blue-600">🔒</span> Is my company data safe?</h3>
+                <p class="text-slate-600">Absolutely. Your spreadsheet data never leaves your computer. The diagram is generated locally within your Excel instance. We do not track, read, or store your numbers.</p>
+            </div>
+            
+            <div>
+                <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><span class="text-blue-600">💻</span> Does it work on Mac & Windows?</h3>
+                <p class="text-slate-600">Yes! SankeyPro is built on Microsoft's modern Office Web Add-in framework. It works seamlessly on Excel for Windows, Mac, and Excel Online (Microsoft 365).</p>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><span class="text-blue-600">⚙️</span> Do I need IT admin rights to install it?</h3>
+                <p class="text-slate-600">No. SankeyPro does not require you to install any `.exe` files. It is loaded directly through Excel as a lightweight add-in, bypassing strict corporate software blocks.</p>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><span class="text-blue-600">📊</span> Can I export the chart to PowerPoint?</h3>
+                <p class="text-slate-600">Yes. You can export your finished Sankey diagram as a high-resolution PNG image with a transparent background, ready to be pasted into PowerPoint, Word, or an email.</p>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><span class="text-blue-600">🎨</span> Can I use my company's brand colors?</h3>
+                <p class="text-slate-600">Definitely. While we provide beautiful default palettes, you can input specific HEX codes to match your exact corporate branding guidelines.</p>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><span class="text-blue-600">💳</span> Is it really a one-time payment?</h3>
+                <p class="text-slate-600">Yes. We hate software subscriptions for small tools as much as you do. The $29 early-bird offer gives you lifetime access, including all future updates. No hidden fees.</p>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><span class="text-blue-600">🔄</span> What if I change computers?</h3>
+                <p class="text-slate-600">Your lifetime license is tied to your Microsoft/Email account, not your physical hardware. You can easily access the add-in when you log into Excel on a new machine.</p>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-lg mb-2 flex items-center gap-2"><span class="text-blue-600">📈</span> Does it work with Google Sheets?</h3>
+                <p class="text-slate-600">Currently, SankeyPro is exclusively built and optimized for Microsoft Excel. A Google Sheets version is on our roadmap for late 2026.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="waitlist" class="pb-32 px-6 mt-12">
+        <div class="max-w-xl mx-auto bg-slate-900 text-white rounded-3xl p-12 text-center shadow-2xl shadow-blue-200">
+            <h2 class="text-3xl font-bold mb-4">Join the Private Beta</h2>
+            <p class="text-slate-400 mb-8">Get the lifetime license for <span class="text-white font-bold">$29</span> instead of <span class="line-through">$79</span>.</p>
+            
+            <a href="https://tally.so/r/7RdZOZ" target="_blank" class="block w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl text-lg transition shadow-lg">
+                Claim My Early Bird Seat
+            </a>
+            
+            <div class="mt-8 flex justify-center items-center gap-6 opacity-60 grayscale">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Microsoft_Office_Excel_%282018%E2%80%93present%29.svg" class="h-8" alt="Excel">
+                <span class="font-bold">Compatible with M365</span>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
