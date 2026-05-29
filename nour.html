@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Une question importante 💕</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', serif; overflow: hidden; width: 100vw; height: 100vh; cursor: none; }
+
+  .screen { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; flex-direction: column; }
+  .screen.active { display: flex; }
+
+  /* CURSEUR CUSTOM */
+  #cursor { position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: none; }
+
+  /* ===== ECRAN 1 : SORTIR ===== */
+  #s1 { background: #ffb3c6; }
+  #s1-bg { position: absolute; inset: 0; overflow: hidden; }
+  .flower { position: absolute; font-size: 2rem; animation: floatFlower linear infinite; opacity: 0.5; }
+  @keyframes floatFlower { 0%{transform: translateY(110vh) rotate(0deg);} 100%{transform: translateY(-10vh) rotate(360deg);} }
+
+  #s1 h1 { font-size: clamp(2rem, 6vw, 4.5rem); color: #8b0038; text-align: center; z-index: 1; text-shadow: 2px 3px 0 #ffccd5; line-height: 1.3; padding: 0 1rem; }
+  #btns1 { display: flex; gap: 2rem; margin-top: 2.5rem; z-index: 1; flex-wrap: wrap; justify-content: center; }
+  .btn-oui { font-size: 2rem; padding: 1rem 3rem; background: #e8005a; color: white; border: none; border-radius: 50px; cursor: pointer; font-family: inherit; box-shadow: 0 6px 0 #9c003d; transition: transform 0.1s, box-shadow 0.1s; }
+  .btn-oui:active { transform: translateY(4px); box-shadow: 0 2px 0 #9c003d; }
+  .btn-oui:hover { background: #ff1a6e; }
+  .btn-non { font-size: 1.4rem; padding: 0.8rem 2rem; background: #ccc; color: #555; border: none; border-radius: 50px; cursor: pointer; font-family: inherit; box-shadow: 0 4px 0 #999; position: fixed; transition: none; white-space: nowrap; }
+
+  /* ===== ECRAN 2 : MANGER ===== */
+  #s2 { background: #fff0f3; }
+  #s2-bg { position: absolute; inset: 0; overflow: hidden; }
+  .heart-bg { position: absolute; animation: floatHeart linear infinite; opacity: 0.35; }
+  @keyframes floatHeart { 0%{transform: translateY(110vh) scale(1);} 50%{transform: translateY(50vh) scale(1.2);} 100%{transform: translateY(-10vh) scale(1);} }
+
+  #s2 h2 { font-size: clamp(1.8rem, 5vw, 3.5rem); color: #cc0044; z-index: 1; text-align: center; padding: 0 1rem; text-shadow: 1px 2px 0 #ffb3c6; }
+  #food-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem; z-index: 1; max-width: 600px; width: 90%; }
+  .food-btn { display: flex; flex-direction: column; align-items: center; padding: 1rem; background: white; border: 3px solid #ffb3c6; border-radius: 16px; cursor: pointer; transition: transform 0.15s, border-color 0.15s; font-family: inherit; }
+  .food-btn:hover { transform: scale(1.07); border-color: #e8005a; }
+  .food-btn canvas { image-rendering: pixelated; }
+  .food-btn span { font-size: 1.1rem; color: #8b0038; font-weight: bold; margin-top: 0.5rem; }
+  .btn-salade { font-size: 1rem; padding: 0.6rem 1.5rem; background: #e0e0e0; color: #666; border: none; border-radius: 30px; cursor: pointer; font-family: inherit; box-shadow: 0 3px 0 #aaa; position: fixed; z-index: 10; }
+
+  /* ===== ECRAN 3 : FILM ===== */
+  #s3 { background: #0a0a1a; }
+  #cinema-bg { position: absolute; inset: 0; }
+  #s3 h2 { font-size: clamp(1.5rem, 4vw, 3rem); color: #fff; z-index: 1; text-align: center; padding: 0 1rem; text-shadow: 0 0 20px #ff69b4; margin-bottom: 1.5rem; }
+  #film-btns { display: flex; gap: 3rem; z-index: 1; flex-wrap: wrap; justify-content: center; }
+  .film-option { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; cursor: pointer; }
+  .film-btn { font-size: 1.3rem; padding: 0.9rem 1.8rem; border: none; border-radius: 12px; cursor: pointer; font-family: inherit; font-weight: bold; transition: transform 0.15s; }
+  .film-btn:hover { transform: scale(1.08); }
+  .btn-mj { background: #f5c518; color: #000; }
+  .btn-prada { background: #cc0044; color: #fff; }
+  .film-option span { color: #ddd; font-size: 0.9rem; margin-top: 0.2rem; }
+
+  /* ===== ECRAN 4 : FIN ===== */
+  #s4 { background: #1a0a2e; overflow: hidden; }
+  #s4 h1 { font-size: clamp(1.8rem, 5vw, 3.5rem); color: #ffb3ff; z-index: 1; text-align: center; padding: 0 1rem; text-shadow: 0 0 30px #ff69b4; }
+  #heart-cursor-trail { position: fixed; pointer-events: none; z-index: 100; }
+  .trail-heart { position: fixed; pointer-events: none; font-size: 1.5rem; animation: trailFade 1s ease-out forwards; }
+  @keyframes trailFade { 0%{opacity:1;transform:translate(-50%,-50%) scale(1);} 100%{opacity:0;transform:translate(-50%,-80%) scale(0.3);} }
+
+  /* ===== PIXEL ART CANVASES ===== */
+  canvas { image-rendering: pixelated; image-rendering: crisp-edges; }
+</style>
+</head>
+<body>
+
+<!-- Curseur custom -->
+<div id="cursor">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="#ff69b4"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg>
+</div>
+
+<!-- ECRAN 1 -->
+<div id="s1" class="screen active">
+  <div id="s1-bg"></div>
+  <h1>Voudrais-tu sortir<br>avec moi ce soir ? 🌸</h1>
+  <div id="btns1">
+    <button class="btn-oui" onclick="goTo(2)">💖 OUI 💖</button>
+    <button class="btn-non" id="btn-non" onmouseenter="fleeBtnNon(event)">Non 🙄</button>
+  </div>
+</div>
+
+<!-- ECRAN 2 -->
+<div id="s2" class="screen">
+  <div id="s2-bg"></div>
+  <h2>Que veux-tu manger ? 🍽️</h2>
+  <div id="food-grid">
+    <button class="food-btn" onclick="chooseFood('Kebab')">
+      <canvas id="c-kebab" width="64" height="64"></canvas>
+      <span>Kebab 🥙</span>
+    </button>
+    <button class="food-btn" onclick="chooseFood('Five Guys')">
+      <canvas id="c-fiveguys" width="64" height="64"></canvas>
+      <span>Five Guys 🍔</span>
+    </button>
+    <button class="food-btn" onclick="chooseFood('Italien')">
+      <canvas id="c-italian" width="64" height="64"></canvas>
+      <span>Italien 🍕</span>
+    </button>
+    <button class="food-btn" onclick="chooseFood('Chipotle')">
+      <canvas id="c-chipotle" width="64" height="64"></canvas>
+      <span>Chipotle 🌯</span>
+    </button>
+  </div>
+  <button class="btn-salade" id="btn-salade" onmouseenter="fleeBtn('btn-salade', event)">🥗 Salade à la maison</button>
+</div>
+
+<!-- ECRAN 3 -->
+<div id="s3" class="screen">
+  <canvas id="cinema-bg" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+  <h2>Que veux-tu regarder ce soir ? 🎬</h2>
+  <div id="film-btns">
+    <div class="film-option">
+      <canvas id="c-mj" width="80" height="96"></canvas>
+      <button class="film-btn btn-mj" onclick="chooseFilm('Michael Jackson')">🎤 Michael Jackson</button>
+      <span>moonwalk inclus</span>
+    </div>
+    <div class="film-option">
+      <canvas id="c-prada" width="80" height="96"></canvas>
+      <button class="film-btn btn-prada" onclick="chooseFilm('Le Diable s\'habille en Prada 2')">👗 Le Diable s'habille en Prada 2</button>
+      <span>fashion & dabs</span>
+    </div>
+  </div>
+</div>
+
+<!-- ECRAN 4 -->
+<div id="s4" class="screen">
+  <canvas id="c-bear" width="96" height="96" style="z-index:1;margin-bottom:1rem;"></canvas>
+  <h1>À ce soir la plus belle 💜✨</h1>
+  <div id="fireworks-canvas-container" style="position:absolute;inset:0;pointer-events:none;z-index:0;"></div>
+</div>
+
+<script>
+// ===== ÉTAT =====
+let foodChoice = '';
+let filmChoice = '';
+let currentScreen = 1;
+const data = { food: '', film: '' };
+
+// ===== CURSOR =====
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+
+// ===== NAVIGATION =====
+function goTo(n) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+  currentScreen = n;
+  if (n === 3) drawCinema();
+  if (n === 4) { startBearAnim(); startFireworks(); startHeartTrail(); }
+}
+
+// ===== FLEEING BUTTONS =====
+function fleeBtnNon(e) {
+  const btn = document.getElementById('btn-non');
+  const bw = btn.offsetWidth, bh = btn.offsetHeight;
+  const mx = e.clientX, my = e.clientY;
+  const margin = 80;
+  let nx = Math.random() * (window.innerWidth - bw - margin*2) + margin;
+  let ny = Math.random() * (window.innerHeight - bh - margin*2) + margin;
+  if (Math.abs(nx - mx) < 120) nx = nx > mx ? nx + 140 : nx - 140;
+  if (Math.abs(ny - my) < 60) ny = ny > my ? ny + 80 : ny - 80;
+  nx = Math.max(10, Math.min(window.innerWidth - bw - 10, nx));
+  ny = Math.max(10, Math.min(window.innerHeight - bh - 10, ny));
+  btn.style.left = nx + 'px';
+  btn.style.top = ny + 'px';
+}
+
+function fleeBtn(id, e) {
+  const btn = document.getElementById(id);
+  const bw = btn.offsetWidth, bh = btn.offsetHeight;
+  const mx = e.clientX, my = e.clientY;
+  let nx = Math.random() * (window.innerWidth - bw - 80) + 40;
+  let ny = Math.random() * (window.innerHeight - bh - 80) + 40;
+  if (Math.abs(nx - mx) < 120) nx = nx > mx ? nx + 140 : nx - 140;
+  if (Math.abs(ny - my) < 60) ny = ny > my ? ny + 80 : ny - 80;
+  nx = Math.max(10, Math.min(window.innerWidth - bw - 10, nx));
+  ny = Math.max(10, Math.min(window.innerHeight - bh - 10, ny));
+  btn.style.left = nx + 'px';
+  btn.style.top = ny + 'px';
+}
+
+// Init positions
+window.addEventListener('load', () => {
+  const nb = document.getElementById('btn-non');
+  nb.style.left = (window.innerWidth/2 + 120) + 'px';
+  nb.style.top = (window.innerHeight/2 + 60) + 'px';
+  const sb = document.getElementById('btn-salade');
+  sb.style.left = (window.innerWidth - 300) + 'px';
+  sb.style.top = (window.innerHeight - 80) + 'px';
+});
+
+// ===== CHOIX REPAS =====
+function chooseFood(choice) {
+  data.food = choice;
+  goTo(3);
+  setTimeout(() => { drawPixelMJ(); drawPixelPrada(); }, 100);
+}
+
+// ===== CHOIX FILM =====
+function chooseFilm(choice) {
+  data.film = choice;
+  submitData();
+  goTo(4);
+}
+
+// ===== FORMSPREE =====
+function submitData() {
+  fetch('https://formspree.io/f/xykvvkyv', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ repas: data.food, film: data.film, message: 'Elle a dit OUI ! 💕' })
+  }).catch(() => {});
+}
+
+// ===== FLEURS ECRAN 1 =====
+const flowers = ['🌸','🌺','🌷','💐','🌹','🌼'];
+const s1bg = document.getElementById('s1-bg');
+for (let i = 0; i < 22; i++) {
+  const f = document.createElement('div');
+  f.className = 'flower';
+  f.textContent = flowers[Math.floor(Math.random()*flowers.length)];
+  f.style.left = Math.random()*100 + 'vw';
+  f.style.fontSize = (1.2 + Math.random()*2) + 'rem';
+  f.style.animationDuration = (6 + Math.random()*10) + 's';
+  f.style.animationDelay = (-Math.random()*10) + 's';
+  s1bg.appendChild(f);
+}
+
+// ===== COEURS ECRAN 2 =====
+const s2bg = document.getElementById('s2-bg');
+const heartChars = ['❤️','💕','💖','💗','💓','💝','💞','🩷'];
+for (let i = 0; i < 30; i++) {
+  const h = document.createElement('div');
+  h.className = 'heart-bg';
+  h.textContent = heartChars[Math.floor(Math.random()*heartChars.length)];
+  h.style.left = Math.random()*100 + 'vw';
+  h.style.fontSize = (1 + Math.random()*2.5) + 'rem';
+  h.style.animationDuration = (5 + Math.random()*9) + 's';
+  h.style.animationDelay = (-Math.random()*9) + 's';
+  s2bg.appendChild(h);
+}
+
+// ===== PIXEL ART SMILEYS FOOD =====
+function drawPixelSmiley(canvasId, color, accessory) {
+  const cv = document.getElementById(canvasId);
+  if (!cv) return;
+  cv.width = 64; cv.height = 64;
+  const ctx = cv.getContext('2d');
+  const s = 4;
+  ctx.clearRect(0,0,64,64);
+  // corps cercle
+  const face = [
+    [0,0,1,1,1,1,1,1,0,0],
+    [0,1,1,1,1,1,1,1,1,0],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1,1,1,1],
+    [0,1,1,1,1,1,1,1,1,0],
+    [0,0,1,1,1,1,1,1,0,0],
+  ];
+  ctx.fillStyle = color;
+  face.forEach((row,y) => row.forEach((v,x) => { if(v) ctx.fillRect(x*s+12,y*s+4,s,s); }));
+  // yeux
+  ctx.fillStyle = '#222';
+  ctx.fillRect(20,16,4,4); ctx.fillRect(36,16,4,4);
+  // sourire
+  const smile = [[0,0,0,0,0,0],[1,0,0,0,0,1],[0,1,1,1,1,0]];
+  smile.forEach((row,y) => row.forEach((v,x) => {
+    if(v){ctx.fillStyle='#222'; ctx.fillRect(16+x*s,28+y*s,s,s);}
+  }));
+  // accessoire
+  if (accessory === 'crown') {
+    ctx.fillStyle = '#f5c518';
+    [[12,0],[16,0],[20,0],[24,0],[28,0],[32,0],[36,0],[40,0],[44,0],[16,-4],[24,-8],[36,-4]].forEach(([x,y])=>ctx.fillRect(x+12,4+y,4,4));
+  } else if (accessory === 'hat') {
+    ctx.fillStyle = '#8B0000';
+    for(let i=0;i<10;i++) ctx.fillRect(14+i*4,0,4,8);
+    for(let i=0;i<12;i++) ctx.fillRect(12+i*4,-4,4,4);
+  } else if (accessory === 'bandana') {
+    ctx.fillStyle = '#ff4500';
+    for(let i=0;i<10;i++) ctx.fillRect(14+i*4,4,4,4);
+  } else if (accessory === 'sombrero') {
+    ctx.fillStyle = '#c8920a';
+    for(let i=0;i<14;i++) ctx.fillRect(8+i*4,-4,4,4);
+    for(let i=0;i<8;i++) ctx.fillRect(16+i*4,-8,4,4);
+    for(let i=0;i<6;i++) ctx.fillRect(20+i*4,-12,4,4);
+  }
+}
+
+window.addEventListener('load', () => {
+  drawPixelSmiley('c-kebab','#f4d03f','bandana');
+  drawPixelSmiley('c-fiveguys','#e74c3c','crown');
+  drawPixelSmiley('c-italian','#27ae60','hat');
+  drawPixelSmiley('c-chipotle','#f39c12','sombrero');
+  animateMJ(); animatePrada();
+});
+
+// ===== CINEMA BG =====
+function drawCinema() {
+  const cv = document.getElementById('cinema-bg');
+  cv.width = window.innerWidth;
+  cv.height = window.innerHeight;
+  const ctx = cv.getContext('2d');
+  const w = cv.width, h = cv.height;
+  ctx.fillStyle = '#0a0a1a';
+  ctx.fillRect(0,0,w,h);
+  // étoiles
+  for(let i=0;i<120;i++){
+    ctx.fillStyle = `rgba(255,255,255,${0.3+Math.random()*0.7})`;
+    const size = Math.random()*2+0.5;
+    ctx.fillRect(Math.random()*w, Math.random()*h*.4, size, size);
+  }
+  // écran blanc
+  const sw = w*0.7, sh = h*0.38, sx = (w-sw)/2, sy = h*0.12;
+  ctx.fillStyle = '#e8e0ff';
+  ctx.fillRect(sx,sy,sw,sh);
+  ctx.strokeStyle = '#9966ff';
+  ctx.lineWidth = 6;
+  ctx.strokeRect(sx,sy,sw,sh);
+  // rideau gauche
+  const rg = ctx.createLinearGradient(0,0,w*0.12,0);
+  rg.addColorStop(0,'#3d0030'); rg.addColorStop(1,'#8b005a');
+  ctx.fillStyle = rg;
+  ctx.fillRect(0,0,w*0.1,h);
+  // rideau droit
+  const rr = ctx.createLinearGradient(w*0.9,0,w,0);
+  rr.addColorStop(0,'#8b005a'); rr.addColorStop(1,'#3d0030');
+  ctx.fillStyle = rr;
+  ctx.fillRect(w*0.9,0,w*0.1,h);
+  // sièges
+  ctx.fillStyle = '#4a0030';
+  for(let row=0;row<4;row++){
+    for(let col=0;col<Math.floor(w/55);col++){
+      const cx2 = 20+col*52, cy2 = h*0.6+row*55;
+      ctx.fillRect(cx2,cy2,38,30);
+      ctx.fillRect(cx2-2,cy2-8,42,10);
+    }
+  }
+  // lumières
+  for(let i=0;i<8;i++){
+    const gx=sx+i*(sw/7), gy=sy+sh+10;
+    const g=ctx.createRadialGradient(gx,gy,0,gx,gy,18);
+    g.addColorStop(0,'rgba(255,220,100,0.9)');g.addColorStop(1,'transparent');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(gx,gy,18,0,Math.PI*2);ctx.fill();
+  }
+}
+
+// ===== PIXEL ART MJ QUI DANSE =====
+let mjFrame = 0;
+const mjFrames = [
+  // frame 1 : debout
+  {body:[[3,2],[4,2],[3,3],[4,3],[3,4],[4,4],[3,5],[4,5],[2,6],[3,6],[4,6],[5,6],[3,7],[4,7],[2,8],[5,8],[2,9],[5,9]],
+   head:[[3,0],[4,0],[3,1],[4,1]]},
+  // frame 2 : moonwalk
+  {body:[[3,2],[4,2],[3,3],[4,3],[3,4],[4,4],[2,5],[3,5],[4,5],[5,5],[3,6],[4,6],[4,7],[5,7],[2,8],[3,8]],
+   head:[[3,0],[4,0],[3,1],[4,1]]},
+];
+
+function drawMJFrame(ctx, scale, frame) {
+  ctx.clearRect(0,0,80,96);
+  const f = mjFrames[frame % mjFrames.length];
+  const s = scale || 8;
+  // chapeau
+  ctx.fillStyle = '#111';
+  [[2,0],[3,0],[4,0],[5,0],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[2,2],[3,2],[4,2],[5,2]].forEach(([x,y])=>ctx.fillRect(x*s,y*s,s,s));
+  // visage
+  ctx.fillStyle = '#c8882a';
+  [[3,3],[4,3],[3,4],[4,4]].forEach(([x,y])=>ctx.fillRect(x*s,y*s,s,s));
+  ctx.fillStyle = '#111';
+  ctx.fillRect(3*s+2,3*s+2,2,2); ctx.fillRect(4*s+4,3*s+2,2,2);
+  // veste noire
+  ctx.fillStyle = '#111';
+  f.body.forEach(([x,y])=>ctx.fillRect(x*s,y*s,s,s));
+  // chaussures blanches
+  ctx.fillStyle = '#fff';
+  (frame%2===0 ? [[2,10],[3,10]] : [[4,10],[5,10]]).forEach(([x,y])=>ctx.fillRect(x*s,y*s,s,s));
+}
+
+function animateMJ() {
+  const cv = document.getElementById('c-mj');
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  let f = 0;
+  setInterval(()=>{ drawMJFrame(ctx, 8, f++); }, 300);
+}
+
+// ===== PIXEL ART FEMME EN ROBE ROUGE =====
+let pradaFrame = 0;
+function drawPradaFrame(ctx, frame) {
+  ctx.clearRect(0,0,80,96);
+  const s = 8;
+  const even = frame % 2 === 0;
+  // cheveux
+  ctx.fillStyle = '#111';
+  [[3,0],[4,0],[5,0],[2,1],[3,1],[4,1],[5,1],[6,1]].forEach(([x,y])=>ctx.fillRect(x*s,y*s,s,s));
+  // visage
+  ctx.fillStyle = '#f4c08a';
+  [[3,2],[4,2],[5,2],[3,3],[4,3],[5,3]].forEach(([x,y])=>ctx.fillRect(x*s,y*s,s,s));
+  ctx.fillStyle = '#111';
+  ctx.fillRect(3*s+1,2*s+2,2,2); ctx.fillRect(5*s-1,2*s+2,2,2);
+  // robe rouge
+  ctx.fillStyle = '#cc0020';
+  [[2,4],[3,4],[4,4],[5,4],[6,4],[2,5],[3,5],[4,5],[5,5],[6,5],[1,6],[2,6],[3,6],[4,6],[5,6],[6,6],[7,6],[1,7],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7],[1,8],[2,8],[6,8],[7,8]].forEach(([x,y])=>ctx.fillRect(x*s,y*s,s,s));
+  // jambes
+  ctx.fillStyle = '#f4c08a';
+  (even ? [[3,9],[4,9],[3,10]] : [[4,9],[5,9],[5,10]]).forEach(([x,y])=>ctx.fillRect(x*s,y*s,s,s));
+  // talons
+  ctx.fillStyle = '#800';
+  (even ? [[3,11]] : [[5,11]]).forEach(([x,y])=>ctx.fillRect(x*s,y*s,s,s));
+  // bras dab
+  ctx.fillStyle = '#cc0020';
+  if (even) {
+    [[1,4],[0,3],[7,5],[8,4]].forEach(([x,y])=>ctx.fillRect(x*s,y*s,s,s));
+    ctx.fillStyle='#f4c08a';
+    ctx.fillRect(0*s,3*s,s,s); ctx.fillRect(8*s,4*s,s,s);
+  } else {
+    [[1,5],[0,4],[7,4],[8,3]].forEach(([x,y])=>ctx.fillRect(x*s,y*s,s,s));
+    ctx.fillStyle='#f4c08a';
+    ctx.fillRect(0*s,4*s,s,s); ctx.fillRect(8*s,3*s,s,s);
+  }
+}
+
+function animatePrada() {
+  const cv = document.getElementById('c-prada');
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  let f = 0;
+  setInterval(()=>{ drawPradaFrame(ctx, f++); }, 350);
+}
+
+function drawPixelMJ() { animateMJ(); }
+function drawPixelPrada() { animatePrada(); }
+
+// ===== ECRAN 4 : OURS QUI DAB =====
+function drawBear(ctx, frame) {
+  ctx.clearRect(0,0,96,96);
+  const s = 8;
+  const even = frame % 2 === 0;
+  // oreilles
+  ctx.fillStyle = '#8b5e3c';
+  [[1,0],[2,0],[7,0],[8,0],[1,1],[2,1],[7,1],[8,1]].forEach(([x,y])=>ctx.fillRect(x*s,y*s,s,s));
+  ctx.fillStyle = '#e8a87c';
+  [[1,0],[7,0]].forEach(([x,y])=>ctx.fillRect(x*s+2,y*s+2,4,4));
+  // tête
+  ctx.fillStyle = '#c8792a';
+  [[2,1],[3,1],[4,1],[5,1],[6,1],[7,1],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2],[8,2],[1,3],[2,3],[3,3],[4,3],[5,3],[6,3],[7,3],[8,3],[2,4],[3,4],[4,4],[5,4],[6,4],[7,4]].forEach(([x,y])=>ctx.fillRect(x*s,y*s,s,s));
+  // yeux
+  ctx.fillStyle = '#1a0a00';
+  ctx.fillRect(3*s,2*s,s,s); ctx.fillRect(6*s,2*s,s,s);
+  // reflet
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(3*s+2,2*s+1,3,3); ctx.fillRect(6*s+2,2*s+1,3,3);
+  // nez
+  ctx.fillStyle = '#3a1a0a';
+  ctx.fillRect(4*s,3*s,2*s,s);
+  // sourire
+  ctx.fillStyle = '#3a1a0a';
+  ctx.fillRect(3*s,4*s,s,4); ctx.fillRect(4*s,4*s+2,2*s,4); ctx.fillRect(6*s,4*s,s,4);
+  // corps
+  ctx.fillStyle = '#c8792a';
+  [[2,5],[3,5],[4,5],[5,5],[6,5],[7,5],[2,6],[3,6],[4,6],[5,6],[6,6],[7,6],[2,7],[3,7],[4,7],[5,7],[6,7],[7,7],[3,8],[4,8],[5,8],[6,8]].forEach(([x,y])=>ctx.fillRect(x*s,y*s,s,s));
+  // ventre
+  ctx.fillStyle = '#e8a87c';
+  [[3,6],[4,6],[5,6],[4,7],[5,7]].forEach(([x,y])=>ctx.fillRect(x*s,y*s,s,s));
+  // pattes
+  ctx.fillStyle = '#8b5e3c';
+  [[3,9],[4,9],[5,9],[6,9],[3,10],[6,10]].forEach(([x,y])=>ctx.fillRect(x*s,y*s,s,s));
+  // bras dab (alternés)
+  ctx.fillStyle = '#c8792a';
+  if (even) {
+    [[1,5],[0,4],[8,6],[9,5]].forEach(([x,y])=>ctx.fillRect(x*s,y*s,s,s));
+    ctx.fillStyle='#8b5e3c';
+    ctx.fillRect(0,4*s,s,s); ctx.fillRect(9*s,5*s,s,s);
+  } else {
+    [[1,6],[0,5],[8,5],[9,4]].forEach(([x,y])=>ctx.fillRect(x*s,y*s,s,s));
+    ctx.fillStyle='#8b5e3c';
+    ctx.fillRect(0,5*s,s,s); ctx.fillRect(9*s,4*s,s,s);
+  }
+  // coeur sur le ventre
+  ctx.fillStyle='#ff1493';
+  ctx.fillRect(4*s,6*s,4,4); ctx.fillRect(5*s,6*s,4,4);
+  ctx.fillRect(3*s+4,6*s+4,2*s+2,4); ctx.fillRect(4*s,6*s+8,s,4);
+}
+
+let bearFrame = 0;
+let bearAnim;
+function startBearAnim() {
+  const cv = document.getElementById('c-bear');
+  const ctx = cv.getContext('2d');
+  clearInterval(bearAnim);
+  bearAnim = setInterval(()=>{ drawBear(ctx, bearFrame++); }, 300);
+}
+
+// ===== COEURS QUI SUIVENT LA SOURIS (ECRAN 4) =====
+function startHeartTrail() {
+  document.addEventListener('mousemove', e => {
+    if (currentScreen !== 4) return;
+    const h = document.createElement('div');
+    h.className = 'trail-heart';
+    h.textContent = ['💖','💕','💗','💓','✨','🩷'][Math.floor(Math.random()*6)];
+    h.style.left = e.clientX+'px';
+    h.style.top = e.clientY+'px';
+    h.style.fontSize = (0.8+Math.random()*1.2)+'rem';
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(), 1000);
+  });
+}
+
+// ===== FEUX D'ARTIFICE ECRAN 4 =====
+function startFireworks() {
+  const container = document.getElementById('fireworks-canvas-container');
+  const cv = document.createElement('canvas');
+  cv.width = window.innerWidth;
+  cv.height = window.innerHeight;
+  cv.style.cssText='position:absolute;inset:0;width:100%;height:100%;';
+  container.appendChild(cv);
+  const ctx = cv.getContext('2d');
+  const particles = [];
+  const colors = ['#ff69b4','#ff1493','#ff69b4','#ffb3ff','#fff','#ffcce0','#ff99cc'];
+
+  function launch() {
+    const x = 80 + Math.random()*(window.innerWidth-160);
+    const y = 50 + Math.random()*(window.innerHeight*0.5);
+    for(let i=0;i<40;i++){
+      const angle = (i/40)*Math.PI*2;
+      const speed = 1+Math.random()*4;
+      particles.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,life:1,color:colors[Math.floor(Math.random()*colors.length)],size:3+Math.random()*3});
+    }
+  }
+
+  function loop() {
+    ctx.fillStyle='rgba(26,10,46,0.18)';
+    ctx.fillRect(0,0,cv.width,cv.height);
+    for(let i=particles.length-1;i>=0;i--){
+      const p=particles[i];
+      p.x+=p.vx; p.y+=p.vy; p.vy+=0.07; p.life-=0.018;
+      if(p.life<=0){particles.splice(i,1);continue;}
+      ctx.globalAlpha=p.life;
+      ctx.fillStyle=p.color;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.size*p.life,0,Math.PI*2);ctx.fill();
+    }
+    ctx.globalAlpha=1;
+    requestAnimationFrame(loop);
+  }
+  setInterval(launch, 800);
+  launch(); launch();
+  loop();
+}
+
+// init MJ et Prada dès le départ (pour l'écran 3)
+window.addEventListener('load', () => {
+  setTimeout(()=>{ drawMJFrame(document.getElementById('c-mj').getContext('2d'), 8, 0); drawPradaFrame(document.getElementById('c-prada').getContext('2d'), 0); }, 200);
+});
+</script>
+</body>
+</html>
